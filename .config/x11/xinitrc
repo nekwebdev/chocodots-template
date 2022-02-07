@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+# https://github.com/nekwebdev/chocodots-template
+# @nekwebdev
+# LICENSE: GPLv3
+
+# xinitrc runs automatically when you run startx
+
+# There are some small but important commands that need to be run when we start
+# the graphical environment. There is a link to this file in ~/.xprofile
+# because that file is run automatically if someone uses a display manager
+# (login screen) and so they are needed there. To prevent doubling up commands,
+# I source them here with the line below.
+
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ]; then
+	. "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile"
+else
+	. "$HOME/.xprofile"
+fi
+
+dwm
+
+# add your wm in that loop to have it autorestart
+# while :; do
+# 	dwm >> "$HOME/.cache/dwm.out"
+# done

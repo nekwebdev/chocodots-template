@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# https://github.com/nekwebdev/chocodots-template
+# @nekwebdev
+# LICENSE: GPLv3
+
+find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull

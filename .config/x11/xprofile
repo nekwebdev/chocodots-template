@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+# https://github.com/nekwebdev/chocodots-template
+# @nekwebdev
+# LICENSE: GPLv3
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+# Some DM do not source .zprofile, hence not loading the .profile symlink
+[ -z "$ENVIRONMENTD" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile"
+
+xrdb "${XDG_CONFIG_HOME}/x11/xresources" & xrdbpid=$!	# use Xresources colors/settings on startup
+# xrandr --dpi 96		# Set DPI. User may want to use a larger number for larger screens.
+# setbg &			# set the background with the `setbg` script for example
+
+# list of programs to autostrat, try using systemd user services instead.
+autostart=""
+if [ -n "$autostart" ]; then
+	for program in $autostart; do
+		pidof -s "$program" || setsid -f "$program"
+	done >/dev/null 2>&1
+fi
+
+# Ensure that xrdb has finished running before moving on to start the WM/DE.
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
