@@ -15,10 +15,10 @@ Don't forget that this is a bare git repository. So you can't just `git clone` i
     chocodots="/usr/bin/git --git-dir=$git_dir --work-tree=$work_tree"
     mkdir -p "$git_dir"
     git init --bare "$git_dir"
-    $dots config status.showUntrackedFiles no
-    $dots remote add origin https://urltoyourrepo.git
-    $dots branch -m main
-    $dots pull origin main
+    chocodots config status.showUntrackedFiles no
+    chocodots remote add origin https://urltoyourrepo.git
+    chocodots branch -m main
+    chocodots pull origin main
 
 Create an alias named for example chocodots for `/usr/bin/git --git-dir=/path/to/folder/.config/dotfiles --work-tree=/path/to/folder`
 
